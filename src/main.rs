@@ -7,8 +7,8 @@ fn main() {
     if let Ok(lines) = read_lines("./src/sample.log") {
         // Consumes the iterator, returns an (Optional) String
         for line in lines {
-            if let Ok(ip) = line {
-                println!("{}", ip);
+            if let Ok(log) = line {
+                parse_log(log);
             }
         }
     }
@@ -20,4 +20,10 @@ fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
 where P: AsRef<Path>, {
     let file = File::open(filename)?;
     Ok(io::BufReader::new(file).lines())
+}
+
+fn parse_log(log: std::string::String) {
+    if log.contains("**") {
+        println!("{}", log);
+    }
 }
